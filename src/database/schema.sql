@@ -13,8 +13,8 @@ CREATE TABLE editoras (
 
 INSERT INTO herois (name, ability) VALUES 
     ('Capitão América', 'Velocidade'),
-    ('Batman', 'Teleportar'),
-    ('Lanterna Verde', 'Cultivar'),
+    ('Batman', 'Detetive'),
+    ('Lanterna Verde', 'Criar construções de energia verde'),
     ('Thor', 'Força');
 
 INSERT INTO editoras (name, publisher, heroi_id) VALUES 

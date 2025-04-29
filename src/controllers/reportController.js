@@ -1,31 +1,54 @@
 const { format } = require("@fast-csv/format");
 const PDFDocument = require("pdfkit");
 
-const heroiModel = require("../models/heroisModel");
+const editoraModel = require("../models/editoraModel");
 
-
-const exportHeroiPDF = async (req, res) => {
+const exportEditoraCSV = async (req, res) => {
     try {
-        const herois = await heroiModel.getAllHerois();
+        const editoras =  await editoraModel.getEditora();
+
+        res.setHeader("Content-Disposition", "attachment; filename=editoras.csv");
+        res.setHeader("Content-Type", "text-csv");
+
+        const csvStream = format({ headers: true});
+        csvStream.pipe(res);
+
+        editoras.forEach((editora) => {
+            csvStream.write({
+                Id: editora.id,
+                Nome: editora.name,
+                Publisher: editora.publisher
+            });
+        });
+        
+        csvStream.end();
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao gerar o CSV"});
+    }
+};
+
+const exportEditoraPDF = async (req, res) => {
+    try {
+        const editoras = await editoraModel.getAllEditoras();
 
         res.setHeader("Content-Type", "application/pdf");
-        res.setHeader("Content-Disposition", "inline; filename=herois.pdf")
+        res.setHeader("Content-Disposition", "inline; filename=editoras.pdf")
 
         const doc = new PDFDocument();
         doc.pipe(res);
 
     
-        doc.fontSize(20).text("Relatorio de Heróis", {align: "center"});
+        doc.fontSize(20).text("Relatorio de Editoras", {align: "center"});
         doc.moveDown();
 
        
-        doc.fontSize(12).text("Id | Nome | Habilidade", {underline: true});
+        doc.fontSize(12).text("Id | Nome | Publisher", {underline: true});
         doc.moveDown(0.5);
 
         
-        herois.forEach((heroi) => {
+        editoras.forEach((editora) => {
             doc.text(
-                `${heroi.id} | ${heroi.name} | ${heroi.habilidade}`
+                `${editora.id} | ${editora.name} | ${editora.publisher}`
             );
         });
 
@@ -35,4 +58,4 @@ const exportHeroiPDF = async (req, res) => {
     }
 };
 
-module.exports = { exportHeroiPDF };
+module.exports = { exportEditoraCSV, exportEditoraPDF };

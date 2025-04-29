@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const postController = require("../controllers/editorasController.js");
+const editorasController = require("../controllers/editorasController.js");
 const upload = require("./../config/upload.js");
-const apiKeyMiddleware = require("../config/apiKey")
 
-router.use(apiKeyMiddleware);
 
 
 /**
@@ -30,7 +28,7 @@ router.use(apiKeyMiddleware);
  *       200:
  *         description: Lista de editoras
  */
-router.get("/editoras", editoraController.getAllEditoras);
+router.get("/editoras", editorasController.getAllEditoras);
 
 /**
  * @swagger
@@ -50,7 +48,7 @@ router.get("/editoras", editoraController.getAllEditoras);
  *       404:
  *         description: Editora não encontrada
  */
-router.get("/editoras/:id", editoraController.getEditora);
+router.get("/editoras/:id", editorasController.getEditora);
 
 /**
  * @swagger
@@ -76,7 +74,7 @@ router.get("/editoras/:id", editoraController.getEditora);
  *       201:
  *         description: Editora criado
  */
-router.post("/editoras", upload.single("photo"), editoraController.createEditora);
+router.post("/editoras", upload.single("photo"), editorasController.createEditora);
 
 /**
  * @swagger
@@ -105,7 +103,7 @@ router.post("/editoras", upload.single("photo"), editoraController.createEditora
  *       200:
  *         description: Editora atualizada
  */
-router.put("/editoras/:id", editoraController.updateEditora);
+router.put("/editoras/:id", editorasController.updateEditora);
 
 /**
  * @swagger
@@ -123,6 +121,6 @@ router.put("/editoras/:id", editoraController.updateEditora);
  *       200:
  *         description: Editora deletada
  */
-router.delete("/editoras/:id", editoraController.deleteEditora);
+router.delete("/editoras/:id", editorasController.deleteEditora);
 
 module.exports = router;
