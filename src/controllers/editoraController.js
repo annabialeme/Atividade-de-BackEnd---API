@@ -23,8 +23,8 @@ const getEditora = async (req, res) => {
 
 const createEditora = async (req, res) => {
     try {
-        const { name} = req.body;
-        const newEditora = await editoraModel.createEditora(name);
+        const { name, publisher} = req.body;
+        const newEditora = await editoraModel.createEditora(name, publisher);
         res.status(201).json(newEditora);
     } catch (error) {
         res.status(500).json({ message: "Erro ao criar editora." });
@@ -33,8 +33,8 @@ const createEditora = async (req, res) => {
 
 const updateEditora = async (req, res) => {
     try {
-        const { name } = req.body;
-        const updatedEditora = await editoraModel.updateEditora(req.params.id, name);
+        const { name, publisher } = req.body;
+        const updatedEditora = await editoraModel.updateEditora(req.params.id, name, publisher);
         if (!updatedEditora) {
             return res.status(404).json({ message: "Editora não encontrada." });
         }

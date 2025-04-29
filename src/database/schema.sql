@@ -7,17 +7,18 @@ CREATE TABLE herois (
 CREATE TABLE editoras (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    publisher VARCHAR(100) NOT NULL,
     heroi_id INTEGER REFERENCES herois(id) ON DELETE SET NULL
 );
 
 INSERT INTO herois (name, ability) VALUES 
     ('Capitão América', 'Velocidade'),
-    ('Doutor Estranho', 'Teleportar'),
-    ('Groot', 'Cultivar'),
+    ('Batman', 'Teleportar'),
+    ('Lanterna Verde', 'Cultivar'),
     ('Thor', 'Força');
 
-INSERT INTO editoras (name, heroi_id) VALUES 
-    ('Capitão América', 1),
-    ('Doutor Estranho', 2),
-    ('Groot', 3),
-    ('Thor', 4);
+INSERT INTO editoras (name, publisher, heroi_id) VALUES 
+    ('Capitão América', 'Marvel', 1),
+    ('Batman', 'DC', 2),
+    ('Lanterna Verde', 'DC', 3),
+    ('Thor', 'Marvel', 4);
