@@ -24,7 +24,8 @@ const getEditora = async (req, res) => {
 const createEditora = async (req, res) => {
     try {
         const { name, publisher} = req.body;
-        const newEditora = await editoraModel.createEditora(name, publisher);
+        const photo = req.file ? req.file.filename : null;
+        const newEditora = await editoraModel.createEditora(name, publisher, photo);
         res.status(201).json(newEditora);
     } catch (error) {
         res.status(500).json({ message: "Erro ao criar editora." });

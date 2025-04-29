@@ -22,10 +22,10 @@ const getEditoraById = async (id) => {
     return result.rows[0];
 };
 
-const createEditora = async (id, name, publisher, heroi_id) => {
+const createEditora = async (id, name, publisher, heroi_id, photo) => {
     const result = await pool.query(
-        "INSERT INTO editoras (name, publisher, heroi_id) VALUES ($1, $2, $3) RETURNING *",
-        [name, publisher, heroi_id, id]
+        "INSERT INTO editoras (name, publisher, heroi_id, photo) VALUES ($1, $2, $3) RETURNING *",
+        [name, publisher, heroi_id, photo]
     );
     return result.rows[0];
 };
