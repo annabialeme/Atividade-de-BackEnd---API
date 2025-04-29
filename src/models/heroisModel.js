@@ -1,6 +1,6 @@
 const pool = require("../config/database");
 
-const getHerois = async (name) => {
+const getAllHerois = async (name) => {
     if(!name){
     const result = await pool.query("SELECT * FROM herois");
     return result.rows;
@@ -43,4 +43,4 @@ const deleteHeroi = async (id) => {
 
 
 
-module.exports = {getHerois, getHeroiById, createHeroi, updateHeroi, deleteHeroi};
+module.exports = {getAllHerois, getHeroiById, createHeroi, updateHeroi, deleteHeroi};
